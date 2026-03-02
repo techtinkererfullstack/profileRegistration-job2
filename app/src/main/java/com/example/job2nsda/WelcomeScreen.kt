@@ -1,5 +1,6 @@
 package com.example.job2nsda
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,10 @@ class WelcomeScreen : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.btnSignIn.setOnClickListener {
+            startActivity(Intent(this, ProfileList::class.java))
         }
 
 
