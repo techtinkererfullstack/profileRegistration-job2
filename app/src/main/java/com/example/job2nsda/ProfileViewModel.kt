@@ -18,6 +18,10 @@ class ProfileViewModel(application: Application): AndroidViewModel(application) 
         profileCount = repository.profileCount
     }
 
+    fun loadProfiles() {
+        allProfiles
+    }
+
     fun insertProfile(profile: Profile) = viewModelScope.launch {
         repository.insertProfile(profile)
     }
