@@ -20,15 +20,8 @@ class ProfileRepo(private val profileDao: ProfileDao) {
         profileDao.deleteProfile(profile)
     }
 
-    fun getAllProfiles(): LiveData<List<Profile>> {
-        return profileDao.getAllProfiles()
-    }
     fun getProfileById(profileId: Int): LiveData<Profile> {
         return profileDao.getProfileById(profileId)
-    }
-
-    fun getProfileCount(): LiveData<Int> {
-        return profileDao.getProfileCount()
     }
 
     suspend fun deleteProfileById(profileId: Int) {

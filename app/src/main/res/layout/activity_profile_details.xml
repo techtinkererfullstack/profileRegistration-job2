@@ -191,9 +191,10 @@
             android:layout_width="0dp"
             android:layout_height="56.dp"
             android:layout_marginEnd="8.dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="EDIT"
-            android:textColor="@color/color_primary"
+            android:backgroundTint="@color/color_primary"
+            android:textColor="@color/color_surface"
             app:strokeColor="@color/color_primary" />
     </LinearLayout>
 
