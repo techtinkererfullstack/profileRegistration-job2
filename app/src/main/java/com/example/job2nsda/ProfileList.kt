@@ -11,12 +11,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.job2nsda.databinding.ActivityProfileListBinding
-import kotlin.jvm.java
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileList : AppCompatActivity() {
     private lateinit var binding: ActivityProfileListBinding
     private lateinit var viewModel: ProfileViewModel
     private lateinit var adapter: ProfileAdapter
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +30,7 @@ class ProfileList : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        auth = FirebaseAuth.getInstance()
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         setupRecyclerView()
@@ -37,6 +38,10 @@ class ProfileList : AppCompatActivity() {
 
         binding.ivAddEmployee.setOnClickListener {
             startActivity(Intent(this, AddProfile::class.java))
+        }
+
+        binding.fabLogout.setOnClickListener {
+            showLogoutConfirmation()
         }
     }
 
@@ -87,7 +92,19 @@ class ProfileList : AppCompatActivity() {
             .show()
     }
 
+    private fun showLogoutConfirmation() {
+        AlertDialog.Builder(this)
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Logout") { _, _ ->
 
-
-
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                auth.signOut()
+                startActivity(intent)
+                finish()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
 }
